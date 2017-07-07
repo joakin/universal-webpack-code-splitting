@@ -12,7 +12,7 @@ app();
 
 const server = express();
 
-const assets = JSON.parse(readJSON("dist/client/assets-manifest.json"));
+const assets = readJSON("dist/client/assets-manifest.json");
 const chunkManifest = readJSON("dist/client/chunk-manifest.json");
 
 const tpl = () => `
@@ -27,20 +27,20 @@ const tpl = () => `
   <!-- <link href="./css/main.24249049.css" rel="stylesheet"> -->
   <!-- link preload chunks and other entry points? Example: -->
   <!-- Could be in response headers or server push on http2 -->
-  ${Object.entries(assets)
-    .map(
-      ([entry, files]) =>
-        files["js"] ? `<link rel="preload" href="${files.js}" as="script">` : ""
-    )
+  ${Object.keys(assets)
+    .map(key => {
+      const files = assets[key];
+      return files["js"] ? `<link rel="preload" href="${files.js}" as="script">` : "";
+    })
     .join("\n")}
-  ${Object.values(JSON.parse(chunkManifest))
-    .map(file => `<link rel="preload" href="${file}" as="script">`)
+  ${Object.keys(chunkManifest)
+    .map(key => `<link rel="preload" href="${chunkManifest[key]}" as="script">`)
     .join("\n")}
   </head>
   <body>
     <div id="root">${render(<App />)}</div>
     <script type="text/javascript">
-    window.webpackManifest = ${chunkManifest}
+    window.webpackManifest = ${JSON.stringify(chunkManifest)}
     </script>
     <script type="text/javascript" src="./${assets.index.js}"></script>
   </body>
@@ -56,5 +56,5 @@ const port = process.env.PORT || 3000;
 server.listen(port, _ => console.log(`Server listening on port ${port}!`));
 
 function readJSON(p) {
-  return fs.readFileSync(path.resolve(p)).toString();
+  return JSON.parse(fs.readFileSync(path.resolve(p)).toString());
 }
