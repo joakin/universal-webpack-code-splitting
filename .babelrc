@@ -1,0 +1,26 @@
+{
+  presets: [
+    ["env", {
+      loose: true,
+      modules: false,
+      targets: {
+        browsers: 'ie >= 11'
+      },
+      exclude: [
+				'transform-regenerator',
+				'transform-es2015-typeof-symbol'
+			]
+    }]
+  ],
+	plugins: [
+    'syntax-dynamic-import',
+		'transform-object-assign',
+		'transform-react-constant-elements',
+		['transform-react-jsx', { pragma: 'h' }],
+		['jsx-pragmatic', {
+			module: 'preact',
+			export: 'h',
+			import: 'h'
+		}]
+	]
+}

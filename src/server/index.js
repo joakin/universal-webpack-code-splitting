@@ -1,7 +1,9 @@
-import app from "../client/app";
 import express from "express";
 import fs from "fs";
 import path from "path";
+import render from "preact-render-to-string";
+import app from "../client/app";
+import App from "../client/components/app";
 
 console.log("Hello server");
 
@@ -36,7 +38,7 @@ const tpl = () => `
     .join("\n")}
   </head>
   <body>
-    <div id="root">Hello world</div>
+    <div id="root">${render(<App />)}</div>
     <script type="text/javascript">
     window.webpackManifest = ${chunkManifest}
     </script>
