@@ -34,6 +34,7 @@ const babelLoaderOptions = targets => ({
   plugins: [
     "syntax-dynamic-import",
     "transform-object-assign",
+    "transform-object-rest-spread",
     "transform-react-constant-elements",
     ["transform-react-jsx", { pragma: "h" }],
     [

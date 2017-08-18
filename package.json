@@ -27,9 +27,10 @@
   "homepage": "https://github.com/joakin/universal-webpack-code-splitting#readme",
   "dependencies": {
     "express": "^4.15.4",
+    "history": "^4.6.3",
+    "path-to-regexp": "^1.7.0",
     "preact": "^8.2.1",
     "preact-render-to-string": "^3.6.3",
-    "preact-router": "^2.5.5",
     "webpack": "^3.5.5"
   },
   "devDependencies": {
@@ -39,6 +40,7 @@
     "babel-plugin-jsx-pragmatic": "^1.0.2",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-object-assign": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-react-constant-elements": "^6.23.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.6.0",

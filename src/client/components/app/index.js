@@ -1,18 +1,14 @@
-import { Link } from "preact-router/match";
+import Link from "../link";
 
 export default ({ children }) =>
   <div>
     <h1>Header, from JS view</h1>
     <ul>
       <li>
-        <Link activeClassName="active" href="/">
-          Home
-        </Link>
+        <Link href="/">Home</Link>
       </li>
       <li>
-        <Link activeClassName="active" href="/about">
-          About
-        </Link>
+        <Link href="/about">About</Link>
       </li>
     </ul>
     <div>

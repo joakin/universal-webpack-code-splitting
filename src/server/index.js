@@ -3,7 +3,8 @@ import fs from "fs";
 import path from "path";
 import render from "preact-render-to-string";
 import app from "../client/util/app";
-import Routes from "../client/routes";
+import routes from "../client/routes";
+import createRouter from "../client/router";
 
 console.log("Starting server");
 
@@ -52,12 +53,27 @@ const tpl = ({ html = "" }) => `
 // Serve webpack generated assets, needs to be before the route *
 server.use(express.static("./dist/client"));
 
+const router = createRouter(routes);
+
 server.get("*", (req, res) =>
-  res.status(200).send(
-    tpl({
-      html: render(<Routes url={req.url} />)
+  router
+    .match(req.url)
+    .then(route => {
+      const Page = route.page.default;
+      const props = {
+        ...route,
+        page: undefined,
+        url: req.url
+      };
+      res.status(200).send(
+        tpl({
+          html: render(<Page {...props} />)
+        })
+      );
     })
-  )
+    .catch(e => {
+      res.status(500).send(e.message + "\n" + e.stack);
+    })
 );
 
 const port = process.env.PORT || 3000;
