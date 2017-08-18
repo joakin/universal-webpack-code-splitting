@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "run-p -s 'compile -- -w' server",
+    "build": "NODE_ENV=production webpack",
     "compile": "webpack",
     "server": "nodemon -w dist dist/server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
