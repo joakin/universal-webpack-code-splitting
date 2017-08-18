@@ -2,8 +2,8 @@ import express from "express";
 import fs from "fs";
 import path from "path";
 import render from "preact-render-to-string";
-import app from "../client/app";
-import App from "../client/components/app";
+import app from "../client/util/app";
+import Routes from "../client/routes";
 
 console.log("Starting server");
 
@@ -15,7 +15,7 @@ const server = express();
 const assets = readJSON("dist/client/assets-manifest.json");
 const chunkManifest = readJSON("dist/client/chunk-manifest.json");
 
-const tpl = () => `
+const tpl = ({ html = "" }) => `
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -40,7 +40,7 @@ const tpl = () => `
     .join("\n")}
   </head>
   <body>
-    <div id="root">${render(<App />)}</div>
+    <div id="root">${html}</div>
     <script type="text/javascript">
     window.webpackManifest = ${JSON.stringify(chunkManifest)}
     </script>
@@ -49,10 +49,16 @@ const tpl = () => `
 </html>
 `;
 
-server.get("/", (req, res) => res.status(200).send(tpl()));
-
-// Serve webpack generated assets
+// Serve webpack generated assets, needs to be before the route *
 server.use(express.static("./dist/client"));
+
+server.get("*", (req, res) =>
+  res.status(200).send(
+    tpl({
+      html: render(<Routes url={req.url} />)
+    })
+  )
+);
 
 const port = process.env.PORT || 3000;
 server.listen(port, _ => console.log(`Server listening on port ${port}!`));

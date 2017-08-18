@@ -1,12 +1,12 @@
-import app from "./app";
+import app from "./util/app";
 
 console.log("Hello browser");
 
 app();
 
 import { render } from "preact";
-import App from "./components/app";
+import Routes from "./routes";
 
 const root = document.getElementById("root");
 
-render(<App />, root, root.lastChild);
+render(<Routes />, root, root.lastChild);
