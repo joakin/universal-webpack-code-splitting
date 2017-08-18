@@ -1,10 +1,12 @@
 export default [
   {
     path: "/",
-    page: () => import("./pages/index")
+    page: () => import(/* webpackChunkName: "pages/index" */ "./pages/index"),
+    chunkName: "pages/index"
   },
   {
     path: "/about",
-    page: () => import("./pages/about")
+    page: () => import(/* webpackChunkName: "pages/about" */ "./pages/about"),
+    chunkName: "pages/about"
   }
 ];

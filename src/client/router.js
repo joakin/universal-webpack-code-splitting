@@ -1,12 +1,11 @@
 import ptr from "path-to-regexp";
 
 export default routes => {
-  const parsedRoutes = routes.map(({ path, page }) => {
+  const parsedRoutes = routes.map(r => {
     const keys = [];
-    const re = ptr(path, keys);
+    const re = ptr(r.path, keys);
     return {
-      path,
-      page,
+      ...r,
       keys,
       re
     };
