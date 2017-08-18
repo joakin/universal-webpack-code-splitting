@@ -1,6 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const webpack = require("webpack");
+const nodeExternals = require("webpack-node-externals");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const CleanObsoleteChunks = require("webpack-clean-obsolete-chunks");
 const AssetsPlugin = require("assets-webpack-plugin");
@@ -119,24 +120,13 @@ module.exports = [
         }
       ]
     },
-    externals: getExternals(),
+    externals: nodeExternals({
+      // do not externalize dependencies that need to be processed by webpack.
+      // you should also whitelist deps that modifies `global` (e.g. polyfills)
+      whitelist: /\.css$/
+    }),
     plugins: commonPlugins.concat([
       new CleanWebpackPlugin(paths.server.output, { verbose: true })
     ])
   }
 ];
-
-function getExternals() {
-  const externals = {};
-  // Don't bundle any node_modules, both to avoid a massive bundle, and problems
-  // with modules that are incompatible with webpack bundling.
-  fs
-    .readdirSync("node_modules")
-    .filter(function(module) {
-      return [".bin"].indexOf(module) === -1;
-    })
-    .forEach(function(module) {
-      externals[module] = "commonjs " + module;
-    });
-  return externals;
-}

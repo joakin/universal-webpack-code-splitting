@@ -5,7 +5,7 @@ import render from "preact-render-to-string";
 import app from "../client/app";
 import App from "../client/components/app";
 
-console.log("Hello server");
+console.log("Starting server");
 
 // Calling client side code that has lazy loading/code splitting
 app();
@@ -30,7 +30,9 @@ const tpl = () => `
   ${Object.keys(assets)
     .map(key => {
       const files = assets[key];
-      return files["js"] ? `<link rel="preload" href="${files.js}" as="script">` : "";
+      return files["js"]
+        ? `<link rel="preload" href="${files.js}" as="script">`
+        : "";
     })
     .join("\n")}
   ${Object.keys(chunkManifest)
