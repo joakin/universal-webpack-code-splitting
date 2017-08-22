@@ -29,7 +29,7 @@ const tpl = ({ pageChunkName, html = "" }) => {
   <title>Test</title>
   <!-- <link rel="manifest" href="/manifest.json">-->
   ${scriptsToLoad
-    .map(s => `<link rel="preload" href="/${s}" as="script">`)
+    .map(s => `<link rel="preload" href="${s}" as="script">`)
     .join("\n")}
   </head>
   <body>
@@ -38,7 +38,7 @@ const tpl = ({ pageChunkName, html = "" }) => {
     window.webpackManifest = ${JSON.stringify(chunkManifest)}
     </script>
     ${scriptsToLoad
-      .map(s => `<script type="text/javascript" src="/${s}"></script>`)
+      .map(s => `<script type="text/javascript" src="${s}"></script>`)
       .join("\n")}
   </body>
 </html>`;

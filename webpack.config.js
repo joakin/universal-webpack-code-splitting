@@ -77,6 +77,7 @@ module.exports = [
       index: "./src/client/index.js"
     },
     output: {
+      publicPath: '/',
       path: paths.client.output,
       chunkFilename: "[name].[chunkhash].js",
       filename: "[name].[chunkhash].js"
