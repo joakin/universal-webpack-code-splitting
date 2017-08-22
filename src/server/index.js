@@ -27,7 +27,7 @@ const tpl = ({ pageChunkName, html = "" }) => {
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Test</title>
-  <!-- <link rel="manifest" href="/manifest.json">
+  <!-- <link rel="manifest" href="/manifest.json">-->
   ${scriptsToLoad
     .map(s => `<link rel="preload" href="/${s}" as="script">`)
     .join("\n")}
