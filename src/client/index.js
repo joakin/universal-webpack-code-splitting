@@ -21,19 +21,11 @@ const unlisten = history.listen((location, action) => {
 renderApp();
 
 function renderApp() {
-  router.match(history.location.pathname).then(route => {
-    const Page = route.page.default;
-    const props = {
-      ...route,
-      page: undefined,
-      router,
-      history,
-      url: history.location.pathname
-    };
-
+  router.match(history.location.pathname).then(({ Page, props }) => {
+    console.log('Re-render', props)
     render(
       <WithContext>
-        <Page {...props} />
+        <Page {...props} history={history} />
       </WithContext>,
       root,
       root.lastChild

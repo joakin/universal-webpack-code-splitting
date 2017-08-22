@@ -8,11 +8,16 @@ export default ({ children }) =>
         <Link href="/">Home</Link>
       </li>
       <li>
+        <Link href="/article/Banana">Article: Banana</Link>
+      </li>
+      <li>
+        <Link href="/article/Apple">Article: Apple</Link>
+      </li>
+      <li>
         <Link href="/about">About</Link>
       </li>
     </ul>
     <div>
-      <h2>Content area</h2>
       {children}
     </div>
   </div>;

@@ -16,7 +16,7 @@ const server = express();
 const assets = readJSON("dist/client/assets-manifest.json");
 const chunkManifest = readJSON("dist/client/chunk-manifest.json");
 
-const tpl = ({ pageChunkName, html = "" }) => {
+const tpl = ({ pageChunkName, initialProps, html = "" }) => {
   const scriptsToLoad = [assets["index"].js, assets[pageChunkName].js];
 
   return `
@@ -36,6 +36,7 @@ const tpl = ({ pageChunkName, html = "" }) => {
     <div id="root">${html}</div>
     <script type="text/javascript">
     window.webpackManifest = ${JSON.stringify(chunkManifest)}
+    window.INITIAL_PROPS = ${JSON.stringify(initialProps)}
     </script>
     ${scriptsToLoad
       .map(s => `<script type="text/javascript" src="${s}"></script>`)
@@ -49,27 +50,23 @@ server.use(express.static("./dist/client"));
 
 const router = createRouter(routes);
 
-server.get("*", (req, res) =>
+server.get("*", (req, res) => {
   router
     .match(req.url)
-    .then(route => {
-      const Page = route.page.default;
-      const props = {
-        ...route,
-        page: undefined,
-        url: req.url
-      };
+    .then(({chunkName, Page, props, initialProps}) => {
       res.status(200).send(
         tpl({
-          pageChunkName: route.chunkName,
+          pageChunkName: chunkName,
+          initialProps,
           html: render(<Page {...props} />)
         })
       );
     })
     .catch(e => {
+      console.error(e.message + "\n" + e.stack)
       res.status(500).send(e.message + "\n" + e.stack);
     })
-);
+});
 
 const port = process.env.PORT || 3000;
 server.listen(port, _ => console.log(`Server listening on port ${port}!`));

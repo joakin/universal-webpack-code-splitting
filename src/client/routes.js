@@ -8,5 +8,10 @@ export default [
     path: "/about",
     page: () => import(/* webpackChunkName: "pages/about" */ "./pages/about"),
     chunkName: "pages/about"
+  },
+  {
+    path: "/article/:title",
+    page: () => import(/* webpackChunkName: "pages/article" */ "./pages/article"),
+    chunkName: "pages/article"
   }
 ];
