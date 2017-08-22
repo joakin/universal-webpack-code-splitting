@@ -8,6 +8,7 @@
     "build": "NODE_ENV=production webpack",
     "compile": "webpack",
     "server": "nodemon -w dist dist/server/index.js",
+    "format": "prettier --write 'src/**/*.js'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -28,6 +29,7 @@
   "dependencies": {
     "express": "^4.15.4",
     "history": "^4.6.3",
+    "isomorphic-unfetch": "^2.0.0",
     "path-to-regexp": "^1.7.0",
     "preact": "^8.2.1",
     "preact-render-to-string": "^3.6.3",
@@ -48,6 +50,7 @@
     "clean-webpack-plugin": "^0.1.16",
     "nodemon": "^1.11.0",
     "npm-run-all": "^4.0.2",
+    "prettier": "^1.5.3",
     "webpack-clean-obsolete-chunks": "^0.2.0",
     "webpack-node-externals": "^1.6.0"
   }
