@@ -93,7 +93,7 @@ module.exports = [
         }
       ]
     },
-    // devtool: isProd ? "source-map" : "cheap-module-eval-source-map",
+    devtool: isProd ? "source-map" : "cheap-module-eval-source-map",
     plugins: commonPlugins
       .concat([
         new CleanWebpackPlugin(paths.client.output, { verbose: true }),
@@ -115,7 +115,9 @@ module.exports = [
           manifestVariable: "webpackManifest"
         })
       ])
-      .concat(isProd ? [new webpack.optimize.UglifyJsPlugin()] : [])
+      .concat(isProd ? [new webpack.optimize.UglifyJsPlugin({
+        sourceMap: true
+      })] : [])
   },
   {
     target: "node",
@@ -125,6 +127,7 @@ module.exports = [
       chunkFilename: "[name].js",
       filename: "[name].js"
     },
+    devtool: 'source-map',
     module: {
       rules: [
         {
