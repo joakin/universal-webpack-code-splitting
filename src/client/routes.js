@@ -11,7 +11,8 @@ export default [
   },
   {
     path: "/article/:title",
-    page: () => import(/* webpackChunkName: "pages/article" */ "./pages/article"),
+    page: () =>
+      import(/* webpackChunkName: "pages/article" */ "./pages/article"),
     chunkName: "pages/article"
   }
 ];

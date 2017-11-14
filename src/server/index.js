@@ -53,7 +53,7 @@ const router = createRouter(routes);
 server.get("*", (req, res) => {
   router
     .match(req.url)
-    .then(({chunkName, Page, props, initialProps}) => {
+    .then(({ chunkName, Page, props, initialProps }) => {
       res.status(200).send(
         tpl({
           pageChunkName: chunkName,
@@ -63,9 +63,9 @@ server.get("*", (req, res) => {
       );
     })
     .catch(e => {
-      console.error(e.message + "\n" + e.stack)
+      console.error(e.message + "\n" + e.stack);
       res.status(500).send(e.message + "\n" + e.stack);
-    })
+    });
 });
 
 const port = process.env.PORT || 3000;

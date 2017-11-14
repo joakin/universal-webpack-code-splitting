@@ -1,6 +1,6 @@
 import Link from "../link";
 
-export default ({ children }) =>
+export default ({ children }) => (
   <div>
     <h1>Header, from JS view</h1>
     <ul>
@@ -17,7 +17,6 @@ export default ({ children }) =>
         <Link href="/about">About</Link>
       </li>
     </ul>
-    <div>
-      {children}
-    </div>
-  </div>;
+    <div>{children}</div>
+  </div>
+);

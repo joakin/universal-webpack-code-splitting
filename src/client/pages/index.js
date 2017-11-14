@@ -1,6 +1,7 @@
 import App from "../components/app";
 
-export default ({}) =>
+export default ({}) => (
   <App>
     <p>Main page</p>
-  </App>;
+  </App>
+);

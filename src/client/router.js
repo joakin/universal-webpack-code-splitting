@@ -18,23 +18,23 @@ export default routes => {
         if (match) {
           const [url, ...values] = match;
           const params = route.keys.reduce((memo, key, index) => {
-            memo[key.name] = values[index]
-            return memo
-          }, {})
+            memo[key.name] = values[index];
+            return memo;
+          }, {});
 
           return route.page().then(m => {
             // Get the initialProps from either global scope (server render),
             // the getInitialProps static method, or a stub if there is none.
-            let initialProps = null
+            let initialProps = null;
             if (typeof window !== "undefined" && window.INITIAL_PROPS) {
-              initialProps = Promise.resolve(window.INITIAL_PROPS)
+              initialProps = Promise.resolve(window.INITIAL_PROPS);
               window.INITIAL_PROPS = undefined;
             } else if (m.default && m.default.getInitialProps) {
-              initialProps = m.default.getInitialProps({ params })
+              initialProps = m.default.getInitialProps({ params });
             } else {
-              initialProps = Promise.resolve({})
+              initialProps = Promise.resolve({});
             }
-initialProps.then(props => console.log(props))
+            initialProps.then(props => console.log(props));
             return initialProps.then(props => ({
               chunkName: route.chunkName,
               Page: m.default,
@@ -45,7 +45,7 @@ initialProps.then(props => console.log(props))
                 ...props
               },
               initialProps: props
-            }))
+            }));
           });
         }
       }

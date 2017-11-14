@@ -22,7 +22,7 @@ renderApp();
 
 function renderApp() {
   router.match(history.location.pathname).then(({ Page, props }) => {
-    console.log('Re-render', props)
+    console.log("Re-render", props);
     render(
       <WithContext>
         <Page {...props} history={history} />

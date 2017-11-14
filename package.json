@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "run-p -s 'compile -- -w' server",
-    "build": "NODE_ENV=production webpack",
+    "start": "rm -rf dist/* && run-p -s 'compile -- -w' server",
+    "build": "rm -rf dist/* && NODE_ENV=production webpack",
     "compile": "webpack",
     "server": "nodemon -w dist dist/server/index.js",
     "format": "prettier --write 'src/**/*.js'",
@@ -15,43 +15,38 @@
     "type": "git",
     "url": "git+https://github.com/joakin/universal-webpack-code-splitting.git"
   },
-  "keywords": [
-    "webpack",
-    "node",
-    "web"
-  ],
+  "keywords": ["webpack", "node", "web"],
   "author": "Joaquin Oltra <joaquin@chimeces.com> (http://chimeces.com)",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/joakin/universal-webpack-code-splitting/issues"
   },
-  "homepage": "https://github.com/joakin/universal-webpack-code-splitting#readme",
+  "homepage":
+    "https://github.com/joakin/universal-webpack-code-splitting#readme",
   "dependencies": {
-    "express": "^4.15.4",
-    "history": "^4.6.3",
+    "express": "^4.16.2",
+    "history": "^4.7.2",
     "isomorphic-unfetch": "^2.0.0",
     "path-to-regexp": "^1.7.0",
-    "preact": "^8.2.1",
-    "preact-render-to-string": "^3.6.3",
-    "webpack": "^3.5.5"
+    "preact": "^8.2.6",
+    "preact-render-to-string": "^3.7.0",
+    "webpack": "^3.8.1"
   },
   "devDependencies": {
     "assets-webpack-plugin": "^3.5.1",
     "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.1",
+    "babel-loader": "^7.1.2",
     "babel-plugin-jsx-pragmatic": "^1.0.2",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-object-assign": "^6.22.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-react-constant-elements": "^6.23.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-preset-env": "^1.6.0",
+    "babel-preset-env": "^1.6.1",
     "chunk-manifest-webpack-plugin": "^1.1.2",
-    "clean-webpack-plugin": "^0.1.16",
-    "nodemon": "^1.11.0",
-    "npm-run-all": "^4.0.2",
-    "prettier": "^1.5.3",
-    "webpack-clean-obsolete-chunks": "^0.2.0",
+    "nodemon": "^1.12.1",
+    "npm-run-all": "^4.1.2",
+    "prettier": "^1.8.2",
     "webpack-node-externals": "^1.6.0"
   }
 }
